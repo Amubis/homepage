@@ -54,6 +54,7 @@
     hsl(35, 100%, 68%)
   );
 
+
   /* solid */
 
   --jet: hsl(0, 0%, 22%);
@@ -334,6 +335,7 @@ main {
 .avatar-box {
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .info-content .name {
@@ -503,7 +505,16 @@ main {
   font-weight: var(--fw-300);
   line-height: 1.6;
 }
-
+.text-right {
+  text-align: right;
+}
+.text-quote {
+  font-style: italic;
+  color: var(--light-gray-70);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-300);
+  margin-bottom: 15px;
+}
 .about-text p { margin-bottom: 15px; }
 
 
@@ -1425,6 +1436,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .testimonials-avatar-box {
     transform: translate(30px, -30px);
     border-radius: 20px;
+    overflow: hidden;
   }
 
   .testimonials-avatar-box img { width: 80px; }
