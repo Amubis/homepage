@@ -301,7 +301,8 @@
   transition: var(--transition-1);
 }
 
-.editor-toolbar button:hover {
+.editor-toolbar button:hover,
+.editor-toolbar button.active {
   background: var(--orange-yellow-crayola);
   color: var(--smoky-black);
 }
