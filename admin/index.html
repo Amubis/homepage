@@ -1,87 +1,119 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>博客管理 - Temple of Amubis</title>
-  
-  <link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="admin-style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>博客管理 - Temple of Amubis</title>
 
-<body>
-  <!-- 登录遮罩层 -->
-  <div id="login-overlay" class="login-overlay">
-    <div class="login-form">
-      <h2>管理员登录</h2>
-      <input type="password" id="password-input" placeholder="请输入密码" />
-      <button onclick="checkPassword()">登录</button>
-      <div id="error-message" class="error-message"></div>
+    <link
+      rel="shortcut icon"
+      href="../assets/images/logo.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="admin-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <button onclick="goToHomePage()" class="home-btn">
+      <img src="../assets/images/logo.ico" alt="Logo" class="home-icon" />
+      <span>Temple of Amubis</span>
+    </button>
+    <!-- 登录遮罩层 -->
+    <div id="login-overlay" class="login-overlay">
+      <div class="login-form">
+        <h2>管理员登录</h2>
+        <input type="password" id="password-input" placeholder="请输入密码" />
+        <button onclick="checkPassword()">登录</button>
+        <button onclick="goToHomePage()">返回</button>
+        <div id="error-message" class="error-message"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- 主管理界面 -->
-  <main id="admin-main" class="admin-main" style="display: none;">
-    <div class="admin-container">
-      <header class="admin-header">
-        <h1>博客管理系统</h1>
-        <button onclick="logout()" class="logout-btn">退出登录</button>
-      </header>
-
-      <nav class="admin-nav">
-        <button class="nav-btn active" onclick="showSection('blog-list')">博客列表</button>
-        <button class="nav-btn" onclick="showSection('blog-editor')">新建博客</button>
-      </nav>
-
-      <!-- 博客列表 -->
-      <section id="blog-list" class="admin-section active">
-        <h2>博客列表</h2>
-        <div class="blog-list-container">
-          <div id="blogs-container"></div>
-        </div>
-      </section>
-
-      <!-- 博客编辑器 -->
-      <section id="blog-editor" class="admin-section">
-        <h2 id="editor-title">新建博客</h2>
-        <div class="editor-container">
-          <div class="editor-header">
-            <input type="text" id="blog-title" placeholder="博客标题" />
-            <input type="text" id="blog-category" placeholder="分类" />
-            <input type="file" id="blog-image" accept="image/*" />
+    <!-- 主管理界面 -->
+    <main id="admin-main" class="admin-main" style="display: none">
+      <div class="admin-container">
+        <header class="admin-header">
+          <div class="header-left">
+            <h1>博客管理系统</h1>
           </div>
-          
-          <div class="editor-toolbar">
-            <button onclick="formatText('bold')"><b>B</b></button>
-            <button onclick="formatText('italic')"><i>I</i></button>
-            <button onclick="formatText('underline')"><u>U</u></button>
-            <button onclick="insertHeading()">H1</button>
-            <button onclick="insertList()">列表</button>
-            <button onclick="insertImage()">插入图片</button>
+        </header>
+
+        <nav class="admin-nav">
+          <button class="nav-btn active" onclick="showSection('blog-list')">
+            博客列表
+          </button>
+          <button class="nav-btn" onclick="showSection('blog-editor')">
+            新建博客
+          </button>
+        </nav>
+
+        <!-- 博客列表 -->
+        <section id="blog-list" class="admin-section active">
+          <h2>博客列表</h2>
+          <div class="blog-list-container">
+            <div id="blogs-container"></div>
           </div>
-          
-          <div class="editor-main">
-            <div id="blog-content" contenteditable="true" class="content-editor">
-              在这里输入博客内容...
+        </section>
+
+        <!-- 博客编辑器 -->
+        <section id="blog-editor" class="admin-section">
+          <h2 id="editor-title">新建博客</h2>
+          <div class="editor-container">
+            <div class="editor-header">
+              <input type="text" id="blog-title" placeholder="博客标题" />
+              <select id="blog-category">
+                <option value="">选择分类</option>
+                <option value="开发">开发</option>
+                <option value="设计">设计</option>
+                <option value="绘画">绘画</option>
+                <option value="媒体">媒体</option>
+                <option value="其他">其他</option>
+              </select>
+              <div class="file-inputs">
+                <label for="blog-cover" class="file-label">插入图片</label>
+                <input type="file" id="blog-cover" accept="image/*" />
+                
+              </div>
+            </div>
+
+            <div class="editor-toolbar">
+              <button onclick="formatText('bold')"><b>B</b></button>
+              <button onclick="formatText('italic')"><i>I</i></button>
+              <button onclick="formatText('underline')"><u>U</u></button>
+              <button onclick="insertHeading()">H1</button>
+              <button onclick="insertList()">列表</button>
+            </div>
+
+            <div class="editor-main">
+              <div
+                id="blog-content"
+                contenteditable="true"
+                class="content-editor"
+              >
+                <p style="color: #888; font-style: italic">
+                  在这里输入博客内容...
+                </p>
+              </div>
+            </div>
+
+            <div class="editor-actions">
+              <button onclick="saveBlog()" class="save-btn">保存博客</button>
+              <button onclick="previewBlog()" class="preview-btn">预览</button>
+              <button onclick="cancelEdit()" class="cancel-btn">取消</button>
             </div>
           </div>
-          
-          <div class="editor-actions">
-            <button onclick="saveBlog()" class="save-btn">保存博客</button>
-            <button onclick="previewBlog()" class="preview-btn">预览</button>
-            <button onclick="cancelEdit()" class="cancel-btn">取消</button>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
+        </section>
+      </div>
+    </main>
 
-  <script src="admin-script.js"></script>
-</body>
+    <script src="admin-script.js"></script>
+  </body>
 </html>

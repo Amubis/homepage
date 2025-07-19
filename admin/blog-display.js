@@ -17,7 +17,7 @@ function loadBlogsToMainPage() {
     <li class="blog-post-item">
       <a href="#" onclick="showBlogDetail(${blog.id}); return false;">
         <figure class="blog-banner-box">
-          <img src="../assets/images/blog-1.jpg" alt="${blog.title}" loading="lazy">
+          <img src="${blog.coverImage || '../assets/images/blog-1.jpg'}" alt="${blog.title}" loading="lazy">
         </figure>
         
         <div class="blog-content">

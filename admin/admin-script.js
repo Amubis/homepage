@@ -10,6 +10,9 @@ let currentEditingBlog = null;
 // 博客数据存储
 let blogs = JSON.parse(localStorage.getItem('amubis_blogs') || '[]');
 
+// 当前博客封面图片
+let currentCoverImage = null;
+
 // SHA256加密函数
 async function sha256(message) {
   const msgBuffer = new TextEncoder().encode(message);
@@ -116,6 +119,7 @@ function editBlog(index) {
   document.getElementById('blog-category').value = blog.category;
   document.getElementById('blog-content').innerHTML = blog.content;
   document.getElementById('editor-title').textContent = '编辑博客';
+  currentCoverImage = blog.coverImage || null;
   
   showSection('blog-editor');
 }
@@ -137,22 +141,39 @@ function formatText(command) {
 
 // 插入标题
 function insertHeading() {
+  const content = document.getElementById('blog-content');
+  if (content.innerHTML.includes('在这里输入博客内容...')) {
+    content.innerHTML = '';
+  }
   const text = prompt('请输入标题文本:');
   if (text) {
+    content.focus();
     document.execCommand('formatBlock', false, 'h3');
-    document.execCommand('insertText', false, text);
+    if (content.innerHTML === '<h3><br></h3>') {
+      content.innerHTML = `<h3>${text}</h3><p><br></p>`;
+    }
   }
 }
 
 // 插入列表
 function insertList() {
+  const content = document.getElementById('blog-content');
+  if (content.innerHTML.includes('在这里输入博客内容...')) {
+    content.innerHTML = '';
+  }
+  content.focus();
   document.execCommand('insertUnorderedList', false, null);
 }
 
 // 插入图片
 function insertImage() {
+  const content = document.getElementById('blog-content');
+  if (content.innerHTML.includes('在这里输入博客内容...')) {
+    content.innerHTML = '';
+  }
   const url = prompt('请输入图片URL:');
   if (url) {
+    content.focus();
     document.execCommand('insertImage', false, url);
   }
 }
@@ -173,7 +194,7 @@ function saveBlog() {
     return;
   }
   
-  if (!content || content.trim() === '在这里输入博客内容...') {
+  if (!content || content.trim() === '' || content.includes('在这里输入博客内容...')) {
     alert('请输入博客内容');
     return;
   }
@@ -182,6 +203,7 @@ function saveBlog() {
     title,
     category,
     content,
+    coverImage: currentCoverImage,
     date: new Date().toLocaleDateString('zh-CN'),
     id: Date.now()
   };
@@ -251,19 +273,60 @@ function cancelEdit() {
 function clearEditor() {
   document.getElementById('blog-title').value = '';
   document.getElementById('blog-category').value = '';
-  document.getElementById('blog-content').innerHTML = '在这里输入博客内容...';
+  document.getElementById('blog-content').innerHTML = '<p style="color: #888; font-style: italic;">在这里输入博客内容...</p>';
   document.getElementById('editor-title').textContent = '新建博客';
   currentEditingBlog = null;
+  currentCoverImage = null;
 }
 
-// 处理图片上传
+// 返回主页
+function goToHomePage() {
+  window.location.href = "../index.html";
+}
+
+// 处理封面图片上传
+document.getElementById('blog-cover').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      currentCoverImage = e.target.result;
+      
+      // 自动将封面图片插入到博客内容中
+      const content = document.getElementById('blog-content');
+      if (content.innerHTML.includes('在这里输入博客内容...')) {
+        content.innerHTML = '';
+      }
+      
+      const img = `<img src="${e.target.result}" style="max-width: 100%; height: auto; margin: 10px 0;" />`;
+      
+      // 如果内容为空或只有占位符，直接插入图片
+      if (content.innerHTML.trim() === '' || content.innerHTML === '<br>') {
+        content.innerHTML = img + '<p><br></p>';
+      } else {
+        // 在现有内容前插入图片
+        content.innerHTML = img + content.innerHTML;
+      }
+      
+      alert('封面图片已设置并插入到内容中');
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// 处理内容图片上传
 document.getElementById('blog-image').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function(e) {
       const img = `<img src="${e.target.result}" style="max-width: 100%; height: auto; margin: 10px 0;" />`;
-      document.getElementById('blog-content').innerHTML += img;
+      const content = document.getElementById('blog-content');
+      if (content.innerHTML.includes('在这里输入博客内容...')) {
+        content.innerHTML = img;
+      } else {
+        content.innerHTML += img;
+      }
     };
     reader.readAsDataURL(file);
   }
@@ -273,6 +336,19 @@ document.getElementById('blog-image').addEventListener('change', function(e) {
 document.getElementById('password-input').addEventListener('keypress', function(e) {
   if (e.key === 'Enter') {
     checkPassword();
+  }
+});
+
+// 编辑器焦点处理
+document.getElementById('blog-content').addEventListener('focus', function() {
+  if (this.innerHTML.includes('在这里输入博客内容...')) {
+    this.innerHTML = '';
+  }
+});
+
+document.getElementById('blog-content').addEventListener('blur', function() {
+  if (this.innerHTML.trim() === '' || this.innerHTML === '<br>') {
+    this.innerHTML = '<p style="color: #888; font-style: italic;">在这里输入博客内容...</p>';
   }
 });
 
