@@ -1,0 +1,338 @@
+
+/* 管理后台专用样式 */
+
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-form {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-2);
+}
+
+.login-form h2 {
+  color: var(--white-2);
+  margin-bottom: 30px;
+  font-size: var(--fs-2);
+}
+
+.login-form input {
+  width: 300px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+  border-radius: 10px;
+  color: var(--white-2);
+  font-size: var(--fs-6);
+}
+
+.login-form button {
+  width: 330px;
+  padding: 15px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  border: none;
+  border-radius: 10px;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  cursor: pointer;
+  transition: var(--transition-1);
+}
+
+.login-form button:hover {
+  background: var(--vegas-gold);
+}
+
+.error-message {
+  color: var(--bittersweet-shimmer);
+  margin-top: 15px;
+  font-size: var(--fs-7);
+}
+
+.admin-main {
+  background: var(--smoky-black);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  padding: 20px 30px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-2);
+}
+
+.admin-header h1 {
+  color: var(--white-2);
+  font-size: var(--fs-1);
+  margin: 0;
+}
+
+.logout-btn {
+  background: var(--bittersweet-shimmer);
+  color: var(--white-1);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--fs-7);
+  transition: var(--transition-1);
+}
+
+.logout-btn:hover {
+  opacity: 0.8;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.nav-btn {
+  background: var(--eerie-black-2);
+  color: var(--light-gray);
+  border: 1px solid var(--jet);
+  padding: 15px 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: var(--fs-6);
+  transition: var(--transition-1);
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.admin-section {
+  display: none;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow-2);
+}
+
+.admin-section.active {
+  display: block;
+}
+
+.admin-section h2 {
+  color: var(--white-2);
+  font-size: var(--fs-2);
+  margin-bottom: 25px;
+}
+
+.blog-list-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.blog-item {
+  background: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-info h3 {
+  color: var(--white-2);
+  margin-bottom: 5px;
+}
+
+.blog-info p {
+  color: var(--light-gray-70);
+  font-size: var(--fs-7);
+}
+
+.blog-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--fs-8);
+  transition: var(--transition-1);
+}
+
+.edit-btn {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.delete-btn {
+  background: var(--bittersweet-shimmer);
+  color: var(--white-1);
+}
+
+.editor-container {
+  max-width: 100%;
+}
+
+.editor-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.editor-header input {
+  background: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--white-2);
+  font-size: var(--fs-6);
+}
+
+.editor-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--eerie-black-1);
+  border-radius: 10px;
+}
+
+.editor-toolbar button {
+  background: var(--jet);
+  color: var(--white-2);
+  border: 1px solid var(--onyx);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--fs-7);
+  transition: var(--transition-1);
+}
+
+.editor-toolbar button:hover {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.content-editor {
+  background: var(--eerie-black-1);
+  border: 1px solid var(--jet);
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 400px;
+  color: var(--white-2);
+  font-size: var(--fs-6);
+  line-height: 1.6;
+  outline: none;
+  overflow-y: auto;
+}
+
+.content-editor:focus {
+  border-color: var(--orange-yellow-crayola);
+}
+
+.editor-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  justify-content: flex-end;
+}
+
+.save-btn,
+.preview-btn,
+.cancel-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  transition: var(--transition-1);
+}
+
+.save-btn {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.preview-btn {
+  background: var(--vegas-gold);
+  color: var(--smoky-black);
+}
+
+.cancel-btn {
+  background: var(--jet);
+  color: var(--white-2);
+}
+
+.save-btn:hover,
+.preview-btn:hover {
+  opacity: 0.9;
+}
+
+.cancel-btn:hover {
+  background: var(--onyx);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .login-form input,
+  .login-form button {
+    width: 280px;
+  }
+  
+  .admin-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .editor-header {
+    grid-template-columns: 1fr;
+  }
+  
+  .editor-toolbar {
+    flex-wrap: wrap;
+  }
+  
+  .editor-actions {
+    flex-direction: column;
+  }
+  
+  .blog-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
