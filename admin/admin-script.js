@@ -281,7 +281,7 @@ function clearEditor() {
 
 // 返回主页
 function goToHomePage() {
-  window.open('../index.html', '_blank');
+  window.location.href = "../index.html";
 }
 
 // 处理封面图片上传

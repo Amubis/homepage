@@ -95,9 +95,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--jet);
   color: var(--white-2);
-  border: 1px solid var(--onyx);
   padding: 10px 15px;
   border-radius: 8px;
   cursor: pointer;
@@ -406,9 +404,11 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+
   .login-form input,
   .login-form button {
     width: 280px;
+    margin: 10px;
   }
 
   .admin-header {
