@@ -53,8 +53,20 @@
         <div class="editor-container">
           <div class="editor-header">
             <input type="text" id="blog-title" placeholder="博客标题" />
-            <input type="text" id="blog-category" placeholder="分类" />
-            <input type="file" id="blog-image" accept="image/*" />
+            <select id="blog-category">
+              <option value="">选择分类</option>
+              <option value="开发">开发</option>
+              <option value="设计">设计</option>
+              <option value="绘画">绘画</option>
+              <option value="媒体">媒体</option>
+              <option value="其他">其他</option>
+            </select>
+            <div class="file-inputs">
+              <label for="blog-cover" class="file-label">封面图片</label>
+              <input type="file" id="blog-cover" accept="image/*" />
+              <label for="blog-image" class="file-label">插入图片</label>
+              <input type="file" id="blog-image" accept="image/*" />
+            </div>
           </div>
           
           <div class="editor-toolbar">
@@ -68,7 +80,7 @@
           
           <div class="editor-main">
             <div id="blog-content" contenteditable="true" class="content-editor">
-              在这里输入博客内容...
+              <p style="color: #888; font-style: italic;">在这里输入博客内容...</p>
             </div>
           </div>
           
