@@ -1,4 +1,4 @@
-modules = ["web", "nodejs-20", "postgresql-16"]
+modules = ["web", "nodejs-20", "postgresql-16", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
@@ -14,3 +14,12 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python -m http.server 5000"
+
+[[workflows.workflow]]
+name = "Start Web Server (Node)"
+author = 39803916
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx http-server -p 5000"
