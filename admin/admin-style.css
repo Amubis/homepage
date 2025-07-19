@@ -85,6 +85,37 @@
   box-shadow: var(--shadow-2);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.home-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--jet);
+  color: var(--white-2);
+  border: 1px solid var(--onyx);
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: var(--fs-7);
+  transition: var(--transition-1);
+  text-decoration: none;
+}
+
+.home-btn:hover {
+  background: var(--onyx);
+  color: var(--orange-yellow-crayola);
+}
+
+.home-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .admin-header h1 {
   color: var(--white-2);
   font-size: var(--fs-1);
@@ -384,6 +415,11 @@
     flex-direction: column;
     gap: 15px;
     text-align: center;
+  }
+
+  .header-left {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .editor-header {

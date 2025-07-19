@@ -279,6 +279,11 @@ function clearEditor() {
   currentCoverImage = null;
 }
 
+// 返回主页
+function goToHomePage() {
+  window.open('../index.html', '_blank');
+}
+
 // 处理封面图片上传
 document.getElementById('blog-cover').addEventListener('change', function(e) {
   const file = e.target.files[0];
@@ -286,7 +291,24 @@ document.getElementById('blog-cover').addEventListener('change', function(e) {
     const reader = new FileReader();
     reader.onload = function(e) {
       currentCoverImage = e.target.result;
-      alert('封面图片已设置');
+      
+      // 自动将封面图片插入到博客内容中
+      const content = document.getElementById('blog-content');
+      if (content.innerHTML.includes('在这里输入博客内容...')) {
+        content.innerHTML = '';
+      }
+      
+      const img = `<img src="${e.target.result}" style="max-width: 100%; height: auto; margin: 10px 0;" />`;
+      
+      // 如果内容为空或只有占位符，直接插入图片
+      if (content.innerHTML.trim() === '' || content.innerHTML === '<br>') {
+        content.innerHTML = img + '<p><br></p>';
+      } else {
+        // 在现有内容前插入图片
+        content.innerHTML = img + content.innerHTML;
+      }
+      
+      alert('封面图片已设置并插入到内容中');
     };
     reader.readAsDataURL(file);
   }
